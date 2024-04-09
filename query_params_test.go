@@ -8,9 +8,9 @@ func TestSetQueryParams(t *testing.T) {
 		{Key: "id", Value: 123},
 	}
 	url := "https://example.com/query"
-	expected := url+"?name=Gabriel&id=123"
+	expected := url + "?name=Gabriel&id=123"
 	url = setQueryParams(queryParams, url)
-	if url != expected{
+	if url != expected {
 		t.Fatalf("Expected: %s, Result: %s", expected, url)
 	}
 }
