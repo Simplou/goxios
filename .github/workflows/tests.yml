@@ -1,0 +1,24 @@
+name: Executar testes da api
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configurar o ambiente Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.22.0
+
+      - name: Clonar o repositório
+        uses: actions/checkout@v2
+
+      - name: Executar testes
+        run: go test   ./...
