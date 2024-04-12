@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"time"
 )
 
 // newRequest creates a new HTTP request with the given method, URL, and body.
@@ -40,11 +41,19 @@ func NewClient(ctx context.Context) *client {
 	}
 }
 
+// SetTimeout sets the timeout for the HTTP client.
+// If a timeout is set, the client will abort the request
+// if the server does not respond within the specified duration.
+func (c *client) SetTimeout(timeout time.Duration) {
+	c.Timeout = timeout
+}
+
 func New(ctx context.Context) *clientV2{
 	return &clientV2{
 		NewClient(ctx),
 	}
 }
+
 
 // Context returns the context associated with the client.
 func (c *client) Context() context.Context {

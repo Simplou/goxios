@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 )
 
 type testServer struct {
@@ -55,6 +56,42 @@ func getTestServer(t *testing.T) *testServer {
 		case http.MethodDelete:
 			w.WriteHeader(http.StatusNoContent)
 		default:
+			w.WriteHeader(http.StatusMethodNotAllowed)
+		}
+	}))
+	return &testServer{ts}
+}
+
+func getTestServerWithTimeout(t *testing.T, timeout time.Duration) *testServer {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodGet:
+			time.Sleep(timeout)
+			w.WriteHeader(http.StatusOK)
+			w.Write([]byte("{'message':'Welcome'}"))
+		case http.MethodPost, http.MethodPut, http.MethodPatch:
+			defer r.Body.Close()
+			b, err := io.ReadAll(r.Body)
+			if err != nil {
+				t.Fatal(err)
+			}
+			var msg string
+			switch r.Method {
+			case http.MethodPost:
+				time.Sleep(timeout)
+				msg = fmt.Sprintf("{'message':'%s created'}", string(b))
+				w.WriteHeader(http.StatusCreated)
+			case http.MethodPut, http.MethodPatch:
+				time.Sleep(timeout)
+				msg = fmt.Sprintf("{'message':'%s updated'}", string(b))
+				w.WriteHeader(http.StatusOK)
+			}
+			w.Write([]byte(msg))
+		case http.MethodDelete:
+			time.Sleep(timeout)
+			w.WriteHeader(http.StatusNoContent)
+		default:
+			time.Sleep(timeout)
 			w.WriteHeader(http.StatusMethodNotAllowed)
 		}
 	}))
