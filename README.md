@@ -35,10 +35,11 @@ import (
 
 func main() {
     // Create a new Goxios client
-    client := goxios.NewClient(context.Background())
+    client := goxios.New(context.Background())
 
     // Make a GET request
-    resp, err := client.Get("https://api.sampleapis.com/codingresources/codingResources", []goxios.Header{})
+    requestOpts := &goxios.RequestOpts{Headers: []goxios.Header{}}
+    resp, err := client.Get("https://api.sampleapis.com/codingresources/codingResources", requestOpts)
     if err != nil {
        panic(err)
     }
