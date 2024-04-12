@@ -27,12 +27,22 @@ type client struct {
 	ctx context.Context
 }
 
+type clientV2 struct{
+	*client
+}
+
 // NewClient creates a new HTTP client with the given context.
 func NewClient(ctx context.Context) *client {
 	return &client{
 		Client: &http.Client{},
 		req:    &http.Request{},
 		ctx:    ctx,
+	}
+}
+
+func New(ctx context.Context) *clientV2{
+	return &clientV2{
+		NewClient(ctx),
 	}
 }
 

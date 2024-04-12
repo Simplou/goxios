@@ -7,11 +7,11 @@ import (
 	"testing"
 )
 
-func TestClientMethods(t *testing.T) {
+func TestV2ClientMethods(t *testing.T) {
 	ts := getTestServer(t)
 	defer ts.Close()
 
-	client := NewClient(context.Background())
+	client := New(context.Background())
 
 	requestJSON := JSON{
 		"username": "gabriel",
@@ -22,22 +22,25 @@ func TestClientMethods(t *testing.T) {
 	}
 
 	testMethods := ts.Methods(b)
-
 	for _, tm := range testMethods {
 		var res *http.Response
 		var err error
 		contentType := Header{Key: "Content-Type", Value: "application/json"}
+		requestOptions := &RequestOpts{
+			Headers: []Header{contentType},
+			Body:    bytes.NewBuffer(tm.body),
+		}
 		switch tm.method {
 		case http.MethodGet:
-			res, err = client.Get(tm.url, []Header{})
+			res, err = client.Get(tm.url, &RequestOpts{Headers: []Header{}})
 		case http.MethodPost:
-			res, err = client.Post(tm.url, []Header{contentType}, bytes.NewBuffer(tm.body))
+			res, err = client.Post(tm.url, requestOptions)
 		case http.MethodPut:
-			res, err = client.Put(tm.url, []Header{contentType}, bytes.NewBuffer(tm.body))
+			res, err = client.Put(tm.url, requestOptions)
 		case http.MethodPatch:
-			res, err = client.Patch(tm.url, []Header{contentType}, bytes.NewBuffer(tm.body))
+			res, err = client.Patch(tm.url, requestOptions)
 		case http.MethodDelete:
-			res, err = client.Delete(tm.url, []Header{contentType}, bytes.NewBuffer(tm.body))
+			res, err = client.Delete(tm.url, requestOptions)
 		}
 		if err != nil {
 			t.Fatal(err)
