@@ -32,6 +32,11 @@ type clientV2 struct{
 	*client
 }
 
+func (v2 *clientV2) RequestUrl() string {
+	return v2.req.URL.String()
+}
+
+
 // NewClient creates a new HTTP client with the given context.
 func NewClient(ctx context.Context) *client {
 	return &client{
