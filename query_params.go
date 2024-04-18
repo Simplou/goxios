@@ -1,6 +1,9 @@
 package goxios
 
-import "fmt"
+import (
+	"fmt"
+	netUrl "net/url"
+)
 
 // QueryParam represents a single key-value pair for query parameters.
 type QueryParam struct {
@@ -16,12 +19,13 @@ func setQueryParams(queryParams []QueryParam, url string) string {
 	if len(queryParams) > 0 {
 		// Iterate over each query parameter.
 		for i, param := range queryParams {
+			value := fmt.Sprintf("%v", param.Value)
 			// If it's not the first parameter, append '&' before the key-value pair.
 			if i > 0 {
-				url += fmt.Sprintf("&%s=%v", param.Key, param.Value)
+				url += fmt.Sprintf("&%s=%s", param.Key, netUrl.QueryEscape(value))
 			} else {
 				// If it's the first parameter, append '?' before the key-value pair.
-				url += fmt.Sprintf("?%s=%v", param.Key, param.Value)
+				url += fmt.Sprintf("?%s=%s", param.Key, netUrl.QueryEscape(value))
 			}
 		}
 	}
