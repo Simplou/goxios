@@ -44,7 +44,7 @@ func TestClientV2WithTimeout(t *testing.T) {
 		if err == nil && res != nil {
 			t.Fatal(err)
 		}
-		t.Log(res)
+		t.Log(res, err.Error())
 	}
 
 }
