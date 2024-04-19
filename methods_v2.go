@@ -45,7 +45,7 @@ func (c *clientV2) Get(url string, options *RequestOpts) (*http.Response, error)
 	queryParams := options.QueryParams
 	// Append query parameters to the URL
 	url = setQueryParams(queryParams, url)
-	
+
 	// Create a new GET request
 	req, err := newRequest(c.ctx, http.MethodGet, url, nil)
 	if err != nil {
