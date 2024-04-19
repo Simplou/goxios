@@ -28,14 +28,13 @@ type client struct {
 	ctx context.Context
 }
 
-type clientV2 struct{
+type clientV2 struct {
 	*client
 }
 
 func (v2 *clientV2) RequestUrl() string {
 	return v2.req.URL.String()
 }
-
 
 // NewClient creates a new HTTP client with the given context.
 func NewClient(ctx context.Context) *client {
@@ -53,12 +52,11 @@ func (c *client) SetTimeout(timeout time.Duration) {
 	c.Timeout = timeout
 }
 
-func New(ctx context.Context) *clientV2{
+func New(ctx context.Context) *clientV2 {
 	return &clientV2{
 		NewClient(ctx),
 	}
 }
-
 
 // Context returns the context associated with the client.
 func (c *client) Context() context.Context {
