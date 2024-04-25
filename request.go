@@ -38,6 +38,14 @@ type clientV2 struct {
 	*client
 }
 
+// SetHeaders sets custom headers on the client.
+// It takes one or more Header pointers as arguments and assigns them to the client's headers field.
+// It returns the slice of Header pointers provided.
+func (v2 *clientV2) SetHeaders(headers ...*Header) []*Header {
+	v2.headers = headers
+	return headers
+}
+
 // RequestUrl returns the URL of the current request.
 // It fetches the URL from the underlying request object and returns it as a string.
 func (v2 *clientV2) RequestUrl() string {
