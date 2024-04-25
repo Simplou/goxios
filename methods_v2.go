@@ -28,6 +28,7 @@ func (c *clientV2) Post(url string, options *RequestOpts) (*http.Response, error
 	c.req = req
 
 	// Set request headers
+	setHeaders(c.req, c.headers)
 	setHeaders(c.req, headers)
 
 	// Get the HTTP response
@@ -54,6 +55,7 @@ func (c *clientV2) Get(url string, options *RequestOpts) (*http.Response, error)
 	c.req = req
 
 	// Set request headers
+	setHeaders(c.req, c.headers)
 	setHeaders(c.req, headers)
 
 	// Get the HTTP response
@@ -81,6 +83,7 @@ func (c *clientV2) Put(url string, options *RequestOpts) (*http.Response, error)
 	c.req = req
 
 	// Set request headers
+	setHeaders(c.req, c.headers)
 	setHeaders(c.req, headers)
 
 	// Get the HTTP response
@@ -108,6 +111,7 @@ func (c *clientV2) Patch(url string, options *RequestOpts) (*http.Response, erro
 	c.req = req
 
 	// Set request headers
+	setHeaders(c.req, c.headers)
 	setHeaders(c.req, headers)
 
 	// Get the HTTP response
@@ -135,6 +139,7 @@ func (c *clientV2) Delete(url string, options *RequestOpts) (*http.Response, err
 	c.req = req
 
 	// Set request headers
+	setHeaders(c.req, c.headers)
 	setHeaders(c.req, headers)
 
 	// Get the HTTP response
