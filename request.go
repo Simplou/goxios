@@ -34,14 +34,14 @@ type client struct {
 // clientV2 represents an extended version of the HTTP client.
 // It embeds a client pointer and an array of Header pointers.
 type clientV2 struct {
-	headers []*Header
+	headers []Header
 	*client
 }
 
 // SetHeaders sets custom headers on the client.
 // It takes one or more Header pointers as arguments and assigns them to the client's headers field.
 // It returns the slice of Header pointers provided.
-func (v2 *clientV2) SetHeaders(headers ...*Header) []*Header {
+func (v2 *clientV2) SetHeaders(headers ...Header) []Header {
 	v2.headers = headers
 	return headers
 }
