@@ -70,7 +70,7 @@ func New(ctx context.Context) *clientV2 {
 func NewClient(ctx context.Context) *client {
 	return &client{
 		Client: &http.Client{},
-		req:    &http.Request{},
+		req:    &http.Request{Header: make(http.Header)},
 		ctx:    ctx,
 	}
 }
