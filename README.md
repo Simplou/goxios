@@ -2,7 +2,7 @@
 
 <p align="center">
 
-[![GoReport](https://img.shields.io/badge/%F0%9F%93%9D%20goreport-A%2B-75C46B?style=flat-square)](https://goreportcard.com/report/github.com/gabrielluizsf/goxios)
+[![GoReport](https://img.shields.io/badge/%F0%9F%93%9D%20goreport-A%2B-75C46B?style=flat-square)](https://goreportcard.com/report/github.com/Simplou/goxios)
 
 </p>
   <em><b>Goxios</b> is an HTTP client written in Go, inspired by <a href="https://github.com/axios/axios">Axios</a>
@@ -30,7 +30,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/gabrielluizsf/goxios"
+	"github.com/Simplou/goxios"
 )
 
 func main() {
@@ -53,7 +53,7 @@ func main() {
 }
 ```
 
-For more advanced usage and customization options, refer to the [documentation](https://pkg.go.dev/github.com/gabrielluizsf/goxios#pkg-overview) on GoDoc.
+For more advanced usage and customization options, refer to the [documentation](https://pkg.go.dev/github.com/Simplou/goxios#pkg-overview) on GoDoc.
 .
 
 ## **License:**
