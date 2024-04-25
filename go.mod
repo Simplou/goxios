@@ -1,3 +1,3 @@
-module github.com/gabrielluizsf/goxios
+module github.com/Simplou/goxios
 
 go 1.22.0
