@@ -34,6 +34,7 @@ type client struct {
 // clientV2 represents an extended version of the HTTP client.
 // It embeds a client pointer and an array of Header pointers.
 type clientV2 struct {
+	headers []*Header
 	*client
 }
 
