@@ -6,9 +6,10 @@ import (
 	"testing"
 )
 
+var requestUrl = "https://api.agify.io/?name=michael"
+
 func TestRequestUrl(t *testing.T) {
 	client := New(context.Background())
-	requestUrl := "https://api.agify.io/?name=michael"
 	res, err := client.Get(requestUrl, &RequestOpts{})
 	if err != nil {
 		t.Fatal(err)
@@ -44,4 +45,17 @@ func TestSetHeaders(t *testing.T) {
 	if client.req.Header.Get(headers[len(headers)-1].Key) != contentType{
 		headerNotSet()
 	}
+	acceptHeaderKey := "Accept"
+	contentType ="application/xml"
+	res, err := client.Get(requestUrl, &RequestOpts{Headers: []Header{{Key: acceptHeaderKey, Value: contentType}}})
+	if err != nil{
+		t.Fatal(err)
+	}
+	if res.Request.Header.Get(acceptHeaderKey) != contentType{
+		headerNotSet()
+	}
+	if res.Request.Header.Get(headers[0].Key) != headers[0].Value{
+		headerNotSet()
+	}
+
 }
