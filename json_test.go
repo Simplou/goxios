@@ -18,10 +18,19 @@ func TestJSON(t *testing.T) {
 		Name string `json:"name"`
 		Job  string `json:"job"`
 	}
+	validateValues := func (){
+		if gabriel.Name != json["name"] && gabriel.Job != json["job"] {
+			t.Fatal("Not decoded")
+		}
+	}
 	if err := DecodeJSON(bytes.NewBuffer(buf), &gabriel); err != nil {
 		t.Fatal(err)
 	}
-	if gabriel.Name != json["name"] && gabriel.Job != json["job"] {
-		t.Fatal("Not decoded")
+	validateValues()
+	name := "gabrielluizsf"
+	json["name"] = name
+	if err := json.Unmarshal(&gabriel); err != nil{
+		t.Fatal(err)
 	}
+	validateValues()
 }

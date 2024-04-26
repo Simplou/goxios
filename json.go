@@ -13,6 +13,14 @@ func (j JSON) Marshal() ([]byte, error) {
 	return json.Marshal(j)
 }
 
+func (j JSON) Unmarshal(v any) error {
+	b, err := j.Marshal()
+	if err != nil {
+		return err
+	}
+	return UnmarshalJSON(b, v)
+}
+
 // DecodeJSON decodes JSON data from the provided io.Reader into the given value.
 func DecodeJSON(body io.Reader, v any) error {
 	return json.NewDecoder(body).Decode(v)
