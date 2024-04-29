@@ -18,7 +18,7 @@ func TestJSON(t *testing.T) {
 		Name string `json:"name"`
 		Job  string `json:"job"`
 	}
-	validateValues := func (){
+	validateValues := func() {
 		if gabriel.Name != json["name"] && gabriel.Job != json["job"] {
 			t.Fatal("Not decoded")
 		}
@@ -29,7 +29,7 @@ func TestJSON(t *testing.T) {
 	validateValues()
 	name := "gabrielluizsf"
 	json["name"] = name
-	if err := json.Unmarshal(&gabriel); err != nil{
+	if err := json.Unmarshal(&gabriel); err != nil {
 		t.Fatal(err)
 	}
 	validateValues()

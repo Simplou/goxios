@@ -42,7 +42,7 @@ type clientV2 struct {
 // It takes one or more Header pointers as arguments and assigns them to the client's headers field.
 // It returns the slice of Header pointers provided.
 func (v2 *clientV2) SetHeaders(headers ...Header) []Header {
-	if len(headers) > 0{
+	if len(headers) > 0 {
 		v2.headers = headers
 		setHeaders(v2.req, headers)
 	}
